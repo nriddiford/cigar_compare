@@ -82,8 +82,9 @@ while(<$in>){
 	# First, skip any reads exceeding the soft clippoing threshold of SC > 15 M < 30 SC > 15 (if run in soft clip mode '-s')
 	if ($soft_clip and $droso_cigar =~ /\d+S\d+M\d+S/){	
 		my ($sc_1, $m, $sc_2) = $droso_cigar =~ /(\d+)S(\d+)M(\d+)S/;
-			
-			if ( ($sc_1 or $sc_2 > 15) and ($sc_1 or $sc_2 > 5) and ($m < 30) ){
+		# Change 2.5.17: this was not properly evaluating sc reads...
+	
+			if ( ($sc_1 > 15 or $sc_2 > 15) and ($sc_1 > 5 and $sc_2 > 5) and ($m < 30) ){
 				# Make a bed file for sc reads removed if running in debug mode
 				print $sc_filter_print "$chrom\t$start\t$bed_stop\n" if $debug;
 				
