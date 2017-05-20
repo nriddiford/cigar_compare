@@ -17,7 +17,7 @@ my $test;
 my $bam_file;
 my $soft_clip;
 
-GetOptions( 'bam=s'   =>      \$bam_file,
+GetOptions( 'bam=s'         =>      \$bam_file,
             'softclip'      =>      \$soft_clip,
             'test'          =>      \$test,
             'debug'         =>      \$debug,
